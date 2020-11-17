@@ -1,2 +1,2 @@
-# SQL
-A couple of SQL assignments that I have done.
+# PLSQL
+A couple of PLSQL and SQL assignments that I have done.
