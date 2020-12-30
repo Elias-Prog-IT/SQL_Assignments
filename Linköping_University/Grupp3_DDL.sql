@@ -43,9 +43,9 @@ SET QUOTED_IDENTIFIER ON
 CREATE TABLE former_journals(
 	PRIMARY KEY(journal_doi),
 	journal_doi NCHAR(20)  NOT NULL,
-	shelf_id	INT		   NOT NULL,
+	shelf_id	INT    NOT NULL,
 	title       NCHAR(100) NOT NULL,
-	author		NCHAR(100) NOT NULL,
+	author	    NCHAR(100) NOT NULL,
 );
 
 /* Object:  Table staff */
@@ -68,7 +68,7 @@ CREATE TABLE library_shelves(
 CREATE TABLE books(
 	PRIMARY KEY(book_id),
 	book_id  INT IDENTITY(1000,1) NOT NULL,
-	shelf_id INT		          NOT NULL,
+	shelf_id INT		      NOT NULL,
 	title    NCHAR(100)           NOT NULL,
 	author   NCHAR(100)           NOT NULL,
 	isbn     NCHAR(100)           NOT NULL,
@@ -82,8 +82,8 @@ CREATE TABLE book_loans(
 	book_loan_id INT IDENTITY(100,1) NOT NULL,
     book_id		 INT                 NOT NULL,
 	staff_id	 INT                 NOT NULL,
-	date_loaned  DATE			     NOT NULL,
-	return_date  DATE				 NOT NULL,
+	date_loaned  DATE		     NOT NULL,
+	return_date  DATE		     NOT NULL,
 	overdue      NUMERIC(18, 0)	     NULL,
 	FOREIGN KEY(book_id)
 	REFERENCES books(book_id),
@@ -96,7 +96,7 @@ CREATE TABLE dig_sites(
 	PRIMARY KEY(dig_site_id),
 	dig_site_id       INT IDENTITY(1,1) NOT NULL,
 	dig_site_name     NCHAR(100)        NOT NULL UNIQUE,
-	depth             NCHAR(100)		NOT NULL,
+	depth             NCHAR(100)	    NOT NULL,
 	dig_site_location NCHAR(100)        NOT NULL,
 	grid	          NCHAR(100)        NOT NULL
 );
@@ -112,13 +112,13 @@ CREATE TABLE students(
 /* Object:  Table artifacts    */
 CREATE TABLE artifacts(
 	PRIMARY KEY(artifact_id),
-	artifact_id			 INT IDENTITY(1000,1) NOT NULL,
+	artifact_id			 INT IDENTITY(1000,1)         NOT NULL,
 	dig_site_id			 INT			      NOT NULL,
 	student_id			 INT			      NOT NULL,
-	artifact_name		 NCHAR(100)	          NOT NULL,
-	artifact_description NCHAR(100)           NOT NULL,
-	date_found			 DATE				  NOT NULL,
-	artifact_shelf		 NCHAR(100)           NOT NULL,
+	artifact_name		 NCHAR(100)	                      NOT NULL,
+	artifact_description NCHAR(100)                               NOT NULL,
+	date_found			 DATE			      NOT NULL,
+	artifact_shelf		 NCHAR(100)                           NOT NULL,
 	FOREIGN KEY(dig_site_id)
 	REFERENCES dig_sites(dig_site_id),
 	FOREIGN KEY(student_id)
@@ -128,12 +128,12 @@ CREATE TABLE artifacts(
 /* Object:  Table artifact_loans    */
 CREATE TABLE artifact_loans(
 	PRIMARY KEY(artifact_loan_id),
-	artifact_loan_id INT IDENTITY(100,1) NOT NULL,
+	artifact_loan_id INT IDENTITY(100,1)             NOT NULL,
 	staff_id         INT				 NOT NULL,
 	artifact_id      INT				 NOT NULL,
 	date_loaned      DATE				 NOT NULL,
-	return_date      DATE			     NOT NULL,
-	overdue          NUMERIC(18, 0)		 NULL,
+	return_date      DATE			         NOT NULL,
+	overdue          NUMERIC(18, 0)		             NULL,
 	FOREIGN KEY(staff_id)
 	REFERENCES staff(staff_id),
 	FOREIGN KEY(artifact_id)
@@ -143,11 +143,11 @@ CREATE TABLE artifact_loans(
 /* Object:  Table slides */
 CREATE TABLE slides(
 	PRIMARY KEY(slide_id),
-	slide_id		  INT IDENTITY(1000,1) NOT NULL,
+	slide_id		  INT IDENTITY(1000,1)     NOT NULL,
 	dig_site_id		  INT		           NOT NULL,
-	artifact_id	      INT		           NOT NULL,
-	slide_description NCHAR(100)           NOT NULL,
-	topic			  NCHAR(100)           NOT NULL,
+	artifact_id	          INT		           NOT NULL,
+	slide_description         NCHAR(100)               NOT NULL,
+	topic			  NCHAR(100)               NOT NULL,
 	FOREIGN KEY(dig_site_id)
 	REFERENCES dig_sites(dig_site_id),
 	FOREIGN KEY(artifact_id)
@@ -157,12 +157,12 @@ CREATE TABLE slides(
 /* Object:  Table slide_loans    */
 CREATE TABLE slide_loans(
 	PRIMARY KEY(slide_loan_id),
-	slide_loan_id INT IDENTITY(100,1) NOT NULL,
-	slide_id      INT				  NOT NULL,
-	staff_id      INT				  NOT NULL,
-	date_loaned   DATE				  NOT NULL,
-	return_date   DATE				  NOT NULL,
-	overdue       DECIMAL(18, 0)	  NULL,
+	slide_loan_id INT IDENTITY(100,1)     NOT NULL,
+	slide_id      INT 		      NOT NULL,
+	staff_id      INT	 	      NOT NULL,
+	date_loaned   DATE		      NOT NULL,
+	return_date   DATE		      NOT NULL,
+	overdue       DECIMAL(18, 0)	          NULL,
 	FOREIGN KEY(slide_id)
 	REFERENCES slides(slide_id),
 	FOREIGN KEY(staff_id)
@@ -184,7 +184,7 @@ CREATE TABLE dig_site_excavators(
 CREATE TABLE scientific_papers(
 	PRIMARY KEY(sp_doi),
 	sp_doi	 NCHAR(20)  NOT NULL,
-	shelf_id INT		NOT NULL,
+	shelf_id INT	    NOT NULL,
 	title	 NCHAR(100) NOT NULL,
 	author	 NCHAR(100) NOT NULL,
 	FOREIGN KEY(shelf_id)
@@ -194,10 +194,10 @@ CREATE TABLE scientific_papers(
 /* Object:  Table journals */
 CREATE TABLE journals(
 	PRIMARY KEY(journal_doi),
-	journal_doi NCHAR(20)  NOT NULL,
+	journal_doi NCHAR(20)              NOT NULL,
 	shelf_id	INT		   NOT NULL,
-	title       NCHAR(100) NOT NULL,
-	author		NCHAR(100) NOT NULL,
+	title           NCHAR(100)         NOT NULL,
+	author		NCHAR(100)         NOT NULL,
 	FOREIGN KEY(shelf_id)
 	REFERENCES library_shelves(shelf_id)
 );
